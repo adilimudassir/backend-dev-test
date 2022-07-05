@@ -11,26 +11,34 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 
 # Create your views here.
+
+# def home():
+#     return redirect("crm:client_list")
+
 class ClientListView(ListView):
     model = Client
+    template_name = "clients/list.html"
 
 class ClientCreateView(CreateView):
     model = Client
     fields = "__all__"
-    
-    success_url = reverse_lazy('crm:client_list')
+    template_name = "clients/form.html"
+    success_url = reverse_lazy("crm:client_list")
 
 class ClientDetailView(DetailView):
     model = Client
+    template_name = "clients/detail.html"
+
 
 class ClientUpdateView(UpdateView):
     model = Client
     fields = "__all__"
-    
-    success_url = reverse_lazy('crm:client_list')
+    template_name = "clients/form.html"
+    success_url = reverse_lazy("crm:client_list")
 
 class ClientDeleteView(DeleteView):
     model = Client
     fields = "__all__"
+    template_name = "clients/confirm_delete.html"
     
-    success_url = reverse_lazy('crm:client_list')
+    success_url = reverse_lazy("crm:client_list")
