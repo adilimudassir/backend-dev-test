@@ -117,6 +117,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -125,7 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # security settings
 # https://docs.djangoproject.com/en/3.2/topics/security/
-SECURE_SSL_REDIRECT=os.environ.get('SECURE_SSL_REDIRECT')
-SESSION_COOKIE_SECURE=os.environ.get('SESSION_COOKIE_SECURE')
-CSRF_COOKIE_SECURE=os.environ.get('CSRF_COOKIE_SECURE')
-SECURE_BROWSER_XSS_FILTER=os.environ.get('SECURE_BROWSER_XSS_FILTER')
+# SECURE_SSL_REDIRECT=os.environ.get('SECURE_SSL_REDIRECT')
+# SESSION_COOKIE_SECURE=os.environ.get('SESSION_COOKIE_SECURE')
+# CSRF_COOKIE_SECURE=os.environ.get('CSRF_COOKIE_SECURE')
+# SECURE_BROWSER_XSS_FILTER=os.environ.get('SECURE_BROWSER_XSS_FILTER')
