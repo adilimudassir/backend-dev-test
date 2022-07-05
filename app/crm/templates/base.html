@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>CRM</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="min-h-full">
+      <nav class="bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 text-white text-4xl font-bolder">
+                CRM
+              </div>
+              <div class="">
+                <div class="ml-10 flex items-baseline space-x-4">
+                  <a
+                    href="#"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    aria-current="page"
+                    >Dashboard</a
+                  >
+
+                  <a
+                    href="{% url 'clients:client_list' %}"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >Clients</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <div>
+            {% block title %} {% if title %}
+            {{title}}
+            {% else %}
+            Dashboard
+            {% endif %} {% endblock title %}
+          </div>
+        </div>
+      </header>
+      <main>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <!-- Replace with your content -->
+          <div class="px-4 py-6 sm:px-0">
+            <div class="border-2 border-solid border-gray-100 rounded-lg min-h-min">
+              {% block content %} 
+              {% endblock content %}
+            </div>
+          </div>
+          <!-- /End replace -->
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
