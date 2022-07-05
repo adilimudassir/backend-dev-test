@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG')
+# DEBUG = os.environ.get('DEBUG')
 
 # ALLOWED_HOSTS = []
 
@@ -118,3 +118,11 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# security settings
+# https://docs.djangoproject.com/en/3.2/topics/security/
+SECURE_SSL_REDIRECT=os.environ.get('SECURE_SSL_REDIRECT')
+SESSION_COOKIE_SECURE=os.environ.get('SESSION_COOKIE_SECURE')
+CSRF_COOKIE_SECURE=os.environ.get('CSRF_COOKIE_SECURE')
+SECURE_BROWSER_XSS_FILTER=os.environ.get('SECURE_BROWSER_XSS_FILTER')
