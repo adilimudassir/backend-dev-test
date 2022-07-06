@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.shortcuts import render
+
+def dashboard(request):
+    return render(request, 'index.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", dashboard, name="dashboard"),
     path("clients/", include("app.crm.urls", namespace="clients")),
     path("api/", include("app.crm.api.urls")),   
 ]

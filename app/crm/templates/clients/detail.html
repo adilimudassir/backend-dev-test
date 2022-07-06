@@ -104,5 +104,13 @@
     </dl>
   </div>
 </div>
+<script>
+  const url = `ws://${window.location.host}/ws/`
 
+  const socket = new WebSocket(url);
+
+  socket.onmessage = (e) => {
+    console.log(JSON.parse(e.data))
+  }
+</script>
 {% endblock content %}

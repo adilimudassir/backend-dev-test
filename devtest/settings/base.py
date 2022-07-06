@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'rest_framework',
+    'channels',
 
     # own apps
     'app.crm',
@@ -75,6 +76,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'devtest.wsgi.application'
+
+ASGI_APPLICATION = 'devtest.asgi.application'
 
 
 # Database
