@@ -21,6 +21,11 @@ class Client(BaseModel):
     class Meta:
         ordering = ['cid']
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # print(self.id)
+
+
     def __str__(self):
         return self.cid
 
