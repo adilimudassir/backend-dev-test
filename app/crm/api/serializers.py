@@ -11,4 +11,16 @@ class ClientSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Client
-        fields = ('cid', 'first_name', 'last_name', 'country_code', 'email', 'address', 'phone', 'created', 'updated', 'clientwallet')
+        fields = (
+            'id',
+            'cid',
+            'first_name',
+            'last_name',
+            'country_code',
+            'email',
+            'address',
+            'phone',
+            'created',
+            'updated',
+            'clientwallet',
+        )
