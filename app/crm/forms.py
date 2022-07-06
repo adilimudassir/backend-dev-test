@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Client
+from .models import Client, ClientWallet
 
 
 class AddClientForm(forms.ModelForm):
@@ -18,3 +18,15 @@ class AddClientForm(forms.ModelForm):
         #     'address': forms.Textarea(attrs={'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'}),
         #     'phone': forms.TextInput(attrs={'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'}),
         # }
+
+class ClientWalletForm(forms.ModelForm):
+
+    class Meta:
+        model = ClientWallet
+        fields = ('total_balance', 'available_balance', 'lien_balance')
+
+        widgets = {
+            'total_balance': forms.TextInput(attrs={'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'}),
+            'available_balance': forms.TextInput(attrs={'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'}),
+            'lien_balance': forms.TextInput(attrs={'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'}),
+        }

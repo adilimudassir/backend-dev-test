@@ -1,8 +1,8 @@
 
 from django.shortcuts import render
 
-from app.crm.models import Client
-from app.crm.forms import AddClientForm
+from app.crm.models import Client, ClientWallet
+from app.crm.forms import AddClientForm, ClientWalletForm
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
@@ -66,6 +66,8 @@ def client_create(request):
         form = AddClientForm(request.POST)
         if form.is_valid():
             form.save()
+            #add client to wallet
+            wallet = ClientWallet.objects.create(client=form.instance)
             return redirect("clients:client_list")
         # client = Client.objects.create(
         #     cid = request.POST["cid"],
@@ -102,9 +104,29 @@ def client_update(request, pk):
 def client_delete(request, pk):
     client = Client.objects.get(pk=pk)
     # if request.method == "POST":
+    #delete client wallet first
+    client_wallet = ClientWallet.objects.get(client=client)
+    client_wallet.delete()
+
+    #delete client
     client.delete()
     return redirect("clients:client_list")
     # context = {
     #     "client": client,
     # }
     # return render(request, "clients/confirm_delete.html", context)
+
+
+def client_wallet_update(request, pk):
+    client_wallet = ClientWallet.objects.get(pk=pk)
+    if request.method == "POST":
+        form = ClientWalletForm(request.POST, instance=client_wallet)
+        if form.is_valid():
+            form.save()
+            return redirect("clients:client_detail", pk=client_wallet.client.pk)
+    else:
+        form = ClientWalletForm(instance=client_wallet)
+    context = {
+        "form": form,
+    }
+    return render(request, "clients/wallet_form.html", context)
