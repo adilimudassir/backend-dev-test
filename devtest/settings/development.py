@@ -3,6 +3,8 @@ import os
 
 DEBUG = os.environ.get('DEBUG')
 
+ALLOWED_HOSTS = ["*"]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
