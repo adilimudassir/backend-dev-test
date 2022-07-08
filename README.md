@@ -4,6 +4,7 @@
 
 1. Get this app to work
    > Installed the basic requirements and packages
+
 2. Change the database config to use PostgreSQL
    > Added the required packages and settings to enable Django connect to PostgreSQL
 3. Config settings for dev, staging and production servers
@@ -21,6 +22,9 @@ A Django app has been created under `/apps/` called `crm`
    > Fixed The BASE_DIR setting to match the actual directory traversion
 
    > Installed the app in the INSTALLED_APPS settings 
+
+   > Fixed The database migration conflict by making the base model abstract
+
 2. Two models has been created for you: "Client" and "ClientWallet": <br/>
    a. Write a CRUD option with the Client Model <br/>
       > Added Two(2) app menus: Dashboard and Clients. The Clients contains the CRUD operations.
