@@ -8,48 +8,50 @@
 
 {% block content %}
   <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="" method="POST">
+      <form action="" method="POST" novalidate>
         {% csrf_token %}
         <div class="shadow overflow-hidden sm:rounded-md">
           <div class="px-4 py-5 bg-white sm:p-6">
+            {% include 'message.html' %}
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6">
-                <label for="cid" class="block text-sm font-medium text-gray-700">Client ID</label>
-                <input type="text" name="cid" id="cid" value="{{ client.cid }}" autocomplete="cid" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                 <label for="first-name" class="block text-sm font-medium text-gray-700">Client ID</label>
+                {{ form.cid }}
+                <span class="text-red-700">{{ form.cid.errors }}</span>
               </div>
               <div class="col-span-3">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                <input type="text" name="first_name" value="{{ client.first_name}}" id="first-name" autocomplete="given-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                {{ form.first_name }}
+                <span class="text-red-700">{{ form.first_name.errors }}</span>
               </div>
 
               <div class="col-span-3">
                 <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                <input type="text" name="last_name" value="{{ client.last_name}}" id="last-name" autocomplete="family-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                {{ form.last_name }}
+                <span class="text-red-700">{{ form.last_name.errors }}</span>
               </div>
 
               <div class="col-span-3">
                 <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                <input type="text" name="email" id="email-address" value="{{ client.email}}" autocomplete="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                {{ form.email }}
+                <span class="text-red-700">{{ form.email.errors }}</span>
               </div>
               <div class="col-span-3">
                 <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                <input type="text" name="phone" value="{{ client.phone}}" id="phone" autocomplete="family-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                {{ form.phone }}
+                <span class="text-red-700">{{ form.phone.errors }}</span>
               </div>
 
               <div class="col-span-6">
                 <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                <select id="country" name="country_code" value="{{ client.country_code}}" autocomplete="country-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
-                </select>
+                {{ form.country_code }}
+                <span class="text-red-700">{{ form.country_code.errors }}</span>
               </div>
 
               <div class="col-span-6">
                 <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                <textarea name="address" id="address" autocomplete="address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" cols="3" rows="3">
-                  {{ client.address}}
-                </textarea>
+                {{ form.address }}
+                <span class="text-red-700">{{ form.address.errors }}</span>
               </div>
             </div>
           </div>
