@@ -28,7 +28,7 @@ def client_create(request):
         if form.is_valid():
             form.save()
 
-            #add client to wallet
+            #create a wallet for the client
             ClientWallet.objects.create(client=form.instance)
             
             messages.success(request, "Client created successfully")
@@ -66,6 +66,7 @@ def client_update(request, pk):
 
 def client_delete(request, pk):
     client = Client.objects.get(pk=pk)
+
     #delete client wallet first
     client_wallet = ClientWallet.objects.get(client=client)
     client_wallet.delete()
@@ -76,7 +77,6 @@ def client_delete(request, pk):
     messages.success(request, "Client deleted successfully")
     return redirect("clients:client_list")
 
-
 def client_wallet_update(request, pk):
     client_wallet = ClientWallet.objects.get(pk=pk)
     
@@ -85,6 +85,7 @@ def client_wallet_update(request, pk):
         
         if form.is_valid():
             form.save()
+
             messages.success(request, "Client wallet updated successfully")
             return redirect("clients:client_detail", pk=client_wallet.client.pk)
         else:

@@ -2,8 +2,7 @@
 <div class="flex items-start justify-between">
   <h3 class="text-2xl font-bolder">Client Details</h3>
 </div>
-{% endblock title %} {% block content %}
-    {% include 'message.html' %}
+{% endblock title %} {% block content %} {% include 'message.html' %}
 
 <div class="bg-white shadow overflow-hidden sm:rounded-lg">
   <div class="flex items-start justify-between px-4 py-5">
@@ -87,32 +86,78 @@
     <dl>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">Total Balance</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <dd
+          class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+          id="total_balance"
+        >
           {{ client.clientwallet.total_balance }}
         </dd>
       </div>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">Available Balance</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <dd
+          class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+          id="available_balance"
+        >
           {{ client.clientwallet.available_balance }}
         </dd>
       </div>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt class="text-sm font-medium text-gray-500">Lian Balance</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <dt class="text-sm font-medium text-gray-500">Lien Balance</dt>
+        <dd
+          class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+          id="lien_balance"
+        >
           {{ client.clientwallet.lien_balance }}
         </dd>
       </div>
     </dl>
   </div>
 </div>
+{{ client.clientwallet.id | json_script:"wallet_id" }}
 <script>
-  const url = `ws://${window.location.host}/ws/`;
+  const walletID = "client_wallet_".concat(
+    JSON.parse(document.getElementById("wallet_id").textContent)
+  );
+  const url = `ws://${window.location.host}/ws/client_wallet/${walletID}/`;
 
   const socket = new WebSocket(url);
 
-  socket.onmessage = (e) => {
-    console.log(JSON.parse(e.data));
+  socket.onopen = () => {
+    console.log("Connected to websocket");
+    
+    socket.onmessage = (e) => {
+      let data = JSON.parse(e.data);
+
+      if (data.type == "update") {
+        document.getElementById("total_balance").textContent =
+          data.message.total_balance;
+        document.getElementById("available_balance").textContent =
+          data.message.available_balance;
+        document.getElementById("lien_balance").textContent =
+          data.message.lien_balance;
+      }
+    };
+
+    const total_balance = document
+      .getElementById("total_balance")
+      .textContent.trim();
+
+    const available_balance = document
+      .getElementById("available_balance")
+      .textContent.trim();
+
+    const lien_balance = document
+      .getElementById("lien_balance")
+      .textContent.trim();
+
+    const wallet = {
+      total_balance,
+      available_balance,
+      lien_balance,
+    };
+
+    socket.send(JSON.stringify(wallet));
   };
 </script>
 {% endblock content %}
