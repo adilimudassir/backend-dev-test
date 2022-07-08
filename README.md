@@ -39,7 +39,7 @@ A Django app has been created under `/apps/` called `crm`
 4. Write a background task that populates the Client model with users from this [endpoint](https://62c2c06cff594c656764970a.mockapi.io/users). This task should run every hour.
    > Added a scheduler that populates the client model with users. Figured the endpoint contains duplicate records but exceptions have been contained
 5. Deploy your code to any of these cloud servers (A.W.S, Google Cloud, Azure or Heroku)
-   > Deployed to AWS servers. [Link Here](http://http://18.170.225.200/)
+   > Deployed to AWS servers. [Link Here](http://18.170.225.200/)
 
 \*\*\* Optional
 
