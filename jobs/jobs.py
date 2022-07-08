@@ -14,17 +14,21 @@ class ClientJobs:
             result = response.json()
 
             for client in result['data']:
-                instance = Client.objects.create(
-                    cid = client["cid"],
-                    first_name = client["first_name"],
-                    last_name = client["last_name"],
-                    email = client["email"],
-                    phone = client["phone"],
-                    country_code = client["country_code"],
-                    address = client["address"],
-                    id = client["id"],
-                    created = client["created_at"],
-                )
                 
-                #add client to wallet
-                ClientWallet.objects.create(client=instance)
+                try:
+                    Client.objects.get(cid=client['cid'])
+                except Client.DoesNotExist:
+                    instance = Client.objects.create(
+                        cid = client["cid"],
+                        first_name = client["first_name"],
+                        last_name = client["last_name"],
+                        email = client["email"],
+                        phone = client["phone"],
+                        country_code = client["country_code"],
+                        address = client["address"],
+                        id = client["id"],
+                        created = client["created_at"],
+                    )
+                    
+                    #add client to wallet
+                    ClientWallet.objects.create(client=instance)
