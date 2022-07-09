@@ -34,8 +34,12 @@ A Django app has been created under `/apps/` called `crm`
 
    c. Write/Configure API endpoints to fetch client (including their wallet balance) <br/>
       > Added two(2) endpoints: 
-      >[/api/](http://18.170.225.200/api/)(for listing of the available endpoints with their appropriate verb), 
-      >[/api/clients](http://18.170.225.200/api/clients) (for fetching the lists of clients with their appropriate wallet balance)
+
+      > [/api/](http://18.170.225.200/api/)(for listing of the available endpoints with their appropriate verb), 
+      
+      > [/api/clients](http://18.170.225.200/api/clients) (for fetching the lists of clients with their appropriate wallet balance)
+
+      > [/api/clients/{id}](http://18.170.225.200/api/clients/5) (for fetching of a particular client with their appropriate wallet balance)
 
    N:B You are to design an appropriate frontend for task in a & b above using <b>Django Template</b> <br/>
 3. Set-up a web socket for the client wallet model
