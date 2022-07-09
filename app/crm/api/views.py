@@ -7,7 +7,8 @@ from app.crm.api.serializers import ClientSerializer
 def get_routes(request):
     routes = [
         'GET /api',
-        'GET /api/clients'
+        'GET /api/clients',
+        'GET /api/clients/<int:id>',
     ]
 
     return Response(routes)
@@ -16,5 +17,12 @@ def get_routes(request):
 def clients(request):
     clients = Client.objects.select_related('clientwallet').all()
     serializer = ClientSerializer(clients, many=True)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_client(request, pk):
+    clients = Client.objects.select_related('clientwallet').get(pk=pk)
+    serializer = ClientSerializer(clients, many=False)
 
     return Response(serializer.data)
