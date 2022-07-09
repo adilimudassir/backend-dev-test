@@ -13,9 +13,13 @@ from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from app.crm.routing import websocket_urlpatterns
-
+import dotenv
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'devtest.settings')
+
+dotenv.load_dotenv(
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+)
 
 application = ProtocolTypeRouter({
     'http': get_asgi_application(),
