@@ -12,6 +12,8 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./data/db:/var/lib/postgresql/data
+    networks:
+      - devtest
 
   app:
     build:
@@ -31,6 +33,9 @@ services:
       - static:/static
     ports:
       - 8000:8000
+    networks:
+      - devtest
+
   nginx:
     build:
       context: ./nginx
@@ -41,5 +46,22 @@ services:
       - 80:80
     depends_on:
       - app
+    networks:
+      - devtest
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - static:/static
+    networks:
+      - devtest
+    depends_on:
+      - app
+
 volumes:
   static:
+networks:
+    devtest:
+        driver: bridge
